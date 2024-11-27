@@ -1,14 +1,14 @@
 # RL-Medical
 
-Here is the recent fork for Deep Reinforcement Learning (DRL) agents applied to medical images
+Here is the recent fork for Deep Reinforcement Learning (DRL) agents applied to medical images <br />
 If you are finding a tensorpack-medical library that can support the latest tensorflow 2.10, here it is.
 
 ## Before you start
 
-DO NOT USE tensorflow!
-DO NOT USE tensorflow!
-DO NOT USE tensorflow!
-unless you do not have other choice.
+DO NOT USE tensorflow!<br />
+DO NOT USE tensorflow!<br />
+DO NOT USE tensorflow!<br />
+unless you do not have other choice.<br />
 
 To save your life, just go for Pytorch.
 (https://pytorch.org/get-started/locally/)
@@ -27,7 +27,7 @@ To save your life, just go for Pytorch.
 tensorpack-medical requires:
 
 + Python=3.6
-+ [tensorflow-gpu=1.14.0](https://pypi.org/project/tensorflow-gpu/)
++ [tensorflow=2.10.1](https://www.tensorflow.org/install/pip))
 + [tensorpack=0.9.5](https://github.com/tensorpack/tensorpack)
 + [opencv-python](https://pypi.org/project/opencv-python/)
 + [pillow](https://pypi.org/project/Pillow/)
