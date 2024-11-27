@@ -30,8 +30,8 @@ def Conv3D(
         dilation_rate=(1, 1, 1),
         activation=None,
         use_bias=True,
-        kernel_initializer=tf.contrib.layers.variance_scaling_initializer(2.0),
-        bias_initializer=tf.zeros_initializer(),
+        kernel_initializer=tf.compat.v1.keras.initializers.VarianceScaling(2.0),
+        bias_initializer=tf.compat.v1.zeros_initializer(),
         kernel_regularizer=None,
         bias_regularizer=None,
         activity_regularizer=None,
@@ -48,7 +48,7 @@ def Conv3D(
     """
     if split == 1:
         with rename_get_variable({'kernel': 'W', 'bias': 'b'}):
-            layer = tf.layers.Conv3D(
+            layer = tf.compat.v1.layers.Conv3D(
                 filters,
                 kernel_size,
                 strides=strides,
@@ -62,7 +62,7 @@ def Conv3D(
                 kernel_regularizer=kernel_regularizer,
                 bias_regularizer=bias_regularizer,
                 activity_regularizer=activity_regularizer)
-            ret = layer.apply(inputs, scope=tf.get_variable_scope())
+            ret = layer.apply(inputs, scope=tf.compat.v1.get_variable_scope())
             ret = tf.identity(ret, name='output')
 
         ret.variables = VariableHolder(W=layer.kernel)
@@ -93,11 +93,11 @@ def Conv3D(
         if get_tf_version_tuple() >= (1, 5):
             kwargs['dilations'] = shape4d(dilation_rate, data_format=data_format)
 
-        W = tf.get_variable(
+        W = tf.compat.v1.get_variable(
             'W', filter_shape, initializer=kernel_initializer)
 
         if use_bias:
-            b = tf.get_variable('b', [out_channel], initializer=bias_initializer)
+            b = tf.compat.v1.get_variable('b', [out_channel], initializer=bias_initializer)
 
         inputs = tf.split(inputs, split, channel_axis)
         # tf.split(value,num_or_size_splits,axis=0, num=None,name='split')
@@ -229,7 +229,7 @@ def Deconv3D(x, out_shape, kernel_shape,
     stride3d = shape3d(stride)
     stride5d = shape5d(stride, data_format=data_format)
     padding = padding.upper()
-    in_shape_dyn = tf.shape(x)
+    in_shape_dyn = tf.shape(input=x)
 
     if isinstance(out_shape, int):
         out_channel = out_shape
@@ -254,14 +254,14 @@ def Deconv3D(x, out_shape, kernel_shape,
     filter_shape = kernel_shape + [out_channel, in_channel]
 
     if W_init is None:
-        W_init = tf.contrib.layers.variance_scaling_initializer() # xavier_initializer_conv2d()
+        W_init = tf.compat.v1.keras.initializers.VarianceScaling(scale=2.0) # xavier_initializer_conv2d()
     if b_init is None:
-        b_init = tf.constant_initializer()
-    W = tf.get_variable('W', filter_shape, initializer=W_init)
+        b_init = tf.compat.v1.constant_initializer()
+    W = tf.compat.v1.get_variable('W', filter_shape, initializer=W_init)
     if use_bias:
-        b = tf.get_variable('b', [out_channel], initializer=b_init)
+        b = tf.compat.v1.get_variable('b', [out_channel], initializer=b_init)
 
-    out_shape_dyn = tf.stack([tf.shape(x)[0]] + shp3_dyn)
+    out_shape_dyn = tf.stack([tf.shape(input=x)[0]] + shp3_dyn)
     conv = tf.nn.conv3d_transpose(
         x, W, out_shape_dyn, stride5d, padding=padding, data_format=data_format)
     conv.set_shape(tf.TensorShape([None] + shp3_static))

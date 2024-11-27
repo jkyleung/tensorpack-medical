@@ -35,7 +35,7 @@ def MaxPooling3D(x, shape, stride=None, padding='VALID', data_format='NDHWC'):
     """
     if stride is None:
         stride = shape
-    ret = tf.layers.max_pooling3d(x, shape, stride, padding,
+    ret = tf.compat.v1.layers.max_pooling3d(x, shape, stride, padding,
                                   'channels_last' if data_format == 'NDHWC' else 'channels_first')
     return tf.identity(ret, name='output')
 
@@ -56,7 +56,7 @@ def AvgPooling3D(x, shape, stride=None, padding='VALID', data_format='NDHWC'):
     """
     if stride is None:
         stride = shape
-    ret = tf.layers.average_pooling3d(x, shape, stride, padding,
+    ret = tf.compat.v1.layers.average_pooling3d(x, shape, stride, padding,
                                       'channels_last' if data_format == 'NDHWC' else 'channels_first')
     return tf.identity(ret, name='output')
 
@@ -75,7 +75,7 @@ def GlobalAvgPooling3D(x, data_format='NDHWC'):
     assert x.shape.ndims == 5
     assert data_format in ['NDHWC', 'NCHDW']
     axis = [1, 2, 3] if data_format == 'NDHWC' else [2, 3, 4]
-    return tf.reduce_mean(x, axis, name='output')
+    return tf.reduce_mean(input_tensor=x, axis=axis, name='output')
 
 
 # def UnPooling2x2ZeroFilled(x):

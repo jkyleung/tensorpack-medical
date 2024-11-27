@@ -92,18 +92,18 @@ def monkeypatch_tf_layers():
     if get_tf_version_tuple() < (1, 4):
         if not hasattr(tf.layers, 'Dense'):
             from tensorflow.python.layers.core import Dense
-            tf.layers.Dense = Dense
+            tf.compat.v1.layers.Dense = Dense
 
             from tensorflow.python.layers.normalization import BatchNormalization
-            tf.layers.BatchNormalization = BatchNormalization
+            tf.compat.v1.layers.BatchNormalization = BatchNormalization
 
             from tensorflow.python.layers.convolutional import Conv2DTranspose, Conv2D
-            tf.layers.Conv2DTranspose = Conv2DTranspose
-            tf.layers.Conv2D = Conv2D
+            tf.compat.v1.layers.Conv2DTranspose = Conv2DTranspose
+            tf.compat.v1.layers.Conv2D = Conv2D
 
             from tensorflow.python.layers.pooling import MaxPooling2D, AveragePooling2D
-            tf.layers.MaxPooling2D = MaxPooling2D
-            tf.layers.AveragePooling2D = AveragePooling2D
+            tf.compat.v1.layers.MaxPooling2D = MaxPooling2D
+            tf.compat.v1.layers.AveragePooling2D = AveragePooling2D
 
 
 monkeypatch_tf_layers()
