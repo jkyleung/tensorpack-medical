@@ -1,6 +1,17 @@
 # RL-Medical
 
-Deep Reinforcement Learning (DRL) agents applied to medical images
+Here is the recent fork for Deep Reinforcement Learning (DRL) agents applied to medical images
+If you are finding a tensorpack-medical library that can support the latest tensorflow 2.10, here it is.
+
+## Before you start
+
+DO NOT USE tensorflow!
+DO NOT USE tensorflow!
+DO NOT USE tensorflow!
+unless you do not have other choice.
+
+To save your life, just go for Pytorch.
+(https://pytorch.org/get-started/locally/)
 
 ## Examples
 
@@ -25,17 +36,13 @@ tensorpack-medical requires:
 
 ### User installation
 ```
-pip install -U git+https://github.com/amiralansary/rl-medical.git
+pip install -U git+https://github.com/jkyleung/rl-medical.git
 ```
-
-## Development
-
-New contributors of any experience level are very welcomed
 
 ### Source code
 You can clone the latest version of the source code with the command::
 ```
-https://github.com/amiralansary/rl-medical.git
+https://github.com/jkyleung/rl-medical.git
 ```
 
 ## Citation
